@@ -56,12 +56,10 @@ public class PlayerStats : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))//for testing
         {
             receiveEXP(20);
-            OnExpGained?.Invoke(this, new StatChangedEventArgs<int> {currentValue = currentEXP, maxValue = requiredEXP});
         }
         if (Input.GetKeyDown(KeyCode.R))//for testing
         {
             UpdateEnergy(-50);
-            OnEnergyChanged?.Invoke(this, new StatChangedEventArgs<float> {currentValue = Energy, maxValue = maxEnergy});
         }
 
         
@@ -107,6 +105,10 @@ public class PlayerStats : MonoBehaviour
         if (Energy >= maxEnergy)
         {
             Energy = maxEnergy;
+        }
+        if (Energy < 0)
+        {
+            Energy = 0;
         }
         OnEnergyChanged?.Invoke(this, new StatChangedEventArgs<float> {currentValue = Energy, maxValue = maxEnergy});
     }

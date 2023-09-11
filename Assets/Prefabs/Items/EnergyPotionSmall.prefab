@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5045311391996810150}
-  - component: {fileID: 3214142576814443410}
+  - component: {fileID: -4136430561753355348}
   m_Layer: 0
   m_Name: EnergyPotionSmall
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3214142576814443410
+--- !u!114 &-4136430561753355348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5593787410215117328}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49cc5e9e5269339419993243ee12f988, type: 3}
+  m_Script: {fileID: 11500000, guid: 41831f876e7feb24bb4516b7ad25b8ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: ca6514e0fdb1c8a45b5312f12e8036ff, type: 2}
-  healingSmall: 20
-  healingMedium: 50
-  healingBig: 100
+  energyRegenSmall: 15
+  energyRegenMedium: 30
+  energyRegenBig: 50

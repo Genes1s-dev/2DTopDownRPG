@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnergyPotion : Item
 {
-    [SerializeField] private int energyRegenSmall = 15;
-    [SerializeField] private int energyRegenMedium = 30;
-    [SerializeField] private int energyRegenBig = 50;
+    [SerializeField] private float energyRegenSmall = 15f;
+    [SerializeField] private float energyRegenMedium = 30f;
+    [SerializeField] private float energyRegenBig = 50f;
     public override void Use()
     {
         switch (itemData.itemType)

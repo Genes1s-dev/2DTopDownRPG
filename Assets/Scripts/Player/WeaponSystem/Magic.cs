@@ -43,6 +43,17 @@ public class Magic : ChargableWeapon
 
     public override void Aim()
     {
+        if (Player.Instance.GetPlayerStats().Energy > energyConsumption)
+        {
+            damage += Time.deltaTime * 10;
+            energyConsumption = damage;
+        } else {
+            //show warning
+        }
+
+        //also add max cap
+        //add another bar to show draining energy before actual hit
+
         chargingTimer += Time.deltaTime;
         if (chargingTimer <= 1.0f)
         {
@@ -73,8 +84,8 @@ public class Magic : ChargableWeapon
 
         magicMissile.GetComponent<Rigidbody2D>().velocity = playerLastMoveInput * weaponSO.projectileFlightSpeed;
 
-        damage = CalculateDamage(currentChargeState);
-        energyConsumption = CalculateEnergyConsumption(currentChargeState);
+        //damage = CalculateDamage(currentChargeState);
+        //energyConsumption = CalculateEnergyConsumption(currentChargeState);
         
         magicMissile.SetDamage(damage);
 

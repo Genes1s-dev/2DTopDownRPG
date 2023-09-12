@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Magic : ChargableWeapon
 {
     [SerializeField] private WeaponSO weaponSO;
     [SerializeField] private MagicMissile magicMissilePrefab;
     protected float damage;
-    [SerializeField] private float amplCoef = 1.5f;
+    private float amplCoef = 1.5f;
     private enum ChargeState
     {
         firstPhase,
@@ -19,7 +20,12 @@ public class Magic : ChargableWeapon
     private ChargeState currentChargeState;
     private float chargingTimer = 0.0f;
     private float baseEnergyConsumption = 10f;
-    
+    public class EnergyChargedEventArgs : EventArgs  //делаем дженерик класс для наших передаваемых аргументов для большей гибкости и во избежания дублирования кода
+    {
+        public float currentEnergyConsump;
+        public float maxEnergy;
+    }  
+    public event EventHandler<EnergyChargedEventArgs> OnChargingBegan;  
 
 
     private void Awake()
@@ -43,16 +49,14 @@ public class Magic : ChargableWeapon
 
     public override void Aim()
     {
-        if (Player.Instance.GetPlayerStats().Energy > energyConsumption)
+        if (Player.Instance.GetPlayerStats().Energy > energyConsumption && chargingTimer <= 4.0f)
         {
             damage += Time.deltaTime * 10;
-            energyConsumption = damage;
-        } else {
-            //show warning
+            energyConsumption = damage - weaponSO.damage;
         }
 
-        //also add max cap
-        //add another bar to show draining energy before actual hit
+        OnChargingBegan?.Invoke(this, new EnergyChargedEventArgs {currentEnergyConsump = energyConsumption, maxEnergy = Player.Instance.GetPlayerStats().Energy});
+
 
         chargingTimer += Time.deltaTime;
         if (chargingTimer <= 1.0f)
@@ -83,9 +87,6 @@ public class Magic : ChargableWeapon
         magicMissile.transform.Rotate(0, 0, Mathf.Atan2(playerLastMoveInput.y, playerLastMoveInput.x) * Mathf.Rad2Deg);
 
         magicMissile.GetComponent<Rigidbody2D>().velocity = playerLastMoveInput * weaponSO.projectileFlightSpeed;
-
-        //damage = CalculateDamage(currentChargeState);
-        //energyConsumption = CalculateEnergyConsumption(currentChargeState);
         
         magicMissile.SetDamage(damage);
 
@@ -94,6 +95,7 @@ public class Magic : ChargableWeapon
 
         Destroy(magicMissile.gameObject, 2f);
         ResetDamageToDefault();
+        energyConsumption = 0;
     }
 
 

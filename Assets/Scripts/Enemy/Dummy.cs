@@ -6,8 +6,8 @@ using System;
 
 public class Dummy : MonoBehaviour, IDamageable
 {
-    private int maxHealth = 1000;
-    private int currentHealth;
+    private float maxHealth = 1000;
+    private float currentHealth;
     [SerializeField] Image hpFillAmount;
 
     private void Start()
@@ -35,7 +35,7 @@ public class Dummy : MonoBehaviour, IDamageable
 
     public void DeathSequence()
     {
-        //
+        Destroy(this.gameObject);
     }
 
   

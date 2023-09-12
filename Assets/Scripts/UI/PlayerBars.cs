@@ -7,10 +7,12 @@ using System;
 public class PlayerBars : MonoBehaviour
 {
     [SerializeField] private PlayerStats playerStats;
+    [SerializeField] private Magic magicWeapon;
     [SerializeField] private float hpBarUpdateDuration = 2f;
     [SerializeField] Image hpBarFront;
     [SerializeField] Image hpBarBack;
-    [SerializeField] Image energyBar;
+    [SerializeField] Image energyMainBar;
+    [SerializeField] Image energySecondaryBar;
     [SerializeField] Image expBar;
     [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] TextMeshProUGUI expText;
@@ -21,6 +23,7 @@ public class PlayerBars : MonoBehaviour
         playerStats.OnHPChanged += Player_OnHPChanged;
         playerStats.OnEnergyChanged += Player_OnEnergyChanged;
         playerStats.OnExpGained += Player_OnExpGained;
+        magicWeapon.OnChargingBegan += MagicWeapon_OnChargingBegan;
     }
 
     private void Player_OnHPChanged(object sender, PlayerStats.StatChangedEventArgs<int> e)
@@ -83,7 +86,18 @@ public class PlayerBars : MonoBehaviour
         float playerMaxEnergy = e.maxValue;
         float energyPercentage = playerEnergy / playerMaxEnergy; 
 
-        energyBar.fillAmount = energyPercentage;
+        energyMainBar.fillAmount = energyPercentage;
+        energySecondaryBar.fillAmount = 1 - energyMainBar.fillAmount;
+    }
+
+    private void MagicWeapon_OnChargingBegan(object sender, Magic.EnergyChargedEventArgs e)
+    {
+        float energyCharged = e.currentEnergyConsump;
+        float maxEnergy = e.maxEnergy;
+        
+        float energyChargedPercentage = energyCharged / maxEnergy;
+
+        energySecondaryBar.fillAmount = (1 - energyMainBar.fillAmount) + energyChargedPercentage;
     }
 
     private void Player_OnExpGained(object sender, PlayerStats.StatChangedEventArgs<int> e)

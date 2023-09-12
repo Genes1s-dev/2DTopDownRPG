@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
     private Player player;
     private int playerLevel = 1;
     private int maxLevel = 20;
-    private Dictionary<int, int> experienceRequiredPerLVL = new Dictionary<int, int> {
+    private readonly Dictionary<int, int> experienceRequiredPerLVL = new Dictionary<int, int> {
         {1, 0}, {2, 100}, {3, 150}, {4, 200}, {5, 250}, {6, 300}, {7, 350}, {8, 400}, {9, 450}, {10, 500},
         {11, 600}, {12, 700}, {13, 800}, {14, 900}, {15, 1000}, {16, 1200}, {17, 1400}, {18, 1600}, {19, 1800}, {20, 2000},
     };
@@ -63,7 +63,7 @@ public class PlayerStats : MonoBehaviour
         }
 
         
-        if (Energy < maxEnergy)
+        if (Energy < maxEnergy && !player.isCharging)
         {
             energyRegenTimer += Time.deltaTime;
             if (energyRegenTimer >= 1.0f)

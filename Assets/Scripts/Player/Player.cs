@@ -123,8 +123,8 @@ public class Player : MonoBehaviour, IDamageable
             case BaseWeapon.Type.magic:
                 if (!currentWeapon.IsCooldown && isCharging)
                 {
-                    currentWeapon.Hit();
                     SpendEnergy(currentWeapon.GetEnergyConsumption());//?
+                    currentWeapon.Hit();
                     isCharging = false;
                     moveSpeed = initialMoveSpeed;
                 }

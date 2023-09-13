@@ -61,21 +61,12 @@ public class Magic : ChargableWeapon
         chargingTimer += Time.deltaTime;
         if (chargingTimer <= 1.0f)
         {
-            currentChargeState = ChargeState.firstPhase;
             Player.Instance.GetAnimator().SetFloat("ChargeState", 0f);
         } else 
-        if (chargingTimer <= 2.0f)
+        if (chargingTimer >= 2.0f && chargingTimer <= 3.0f)
         {
-            currentChargeState = ChargeState.secondPhase;
-        } else
-        if (chargingTimer <= 3.0f)
-        {
-            currentChargeState = ChargeState.thirdPhase;
             Player.Instance.GetAnimator().SetFloat("ChargeState", 1f);
-        } else 
-        {
-            currentChargeState = ChargeState.finalPhase;
-        }
+        } 
     }
 
     public override void Hit()
@@ -97,57 +88,6 @@ public class Magic : ChargableWeapon
         ResetDamageToDefault();
         energyConsumption = 0;
     }
-
-
-    private float CalculateDamage(ChargeState currentState)
-    {
-        float dmg = 0;
-        switch(currentState)
-        {
-            case ChargeState.firstPhase:
-                ResetDamageToDefault();  //10
-                break;
-            case ChargeState.secondPhase:
-                dmg = Mathf.Floor(damage * amplCoef);  //15
-                break;
-            case ChargeState.thirdPhase:
-                dmg = Mathf.Floor(damage * Mathf.Pow(amplCoef, 2));   //22
-                break;
-            case ChargeState.finalPhase:
-                dmg = Mathf.Floor(damage * Mathf.Pow(amplCoef, 3));  //33
-                break;
-            default:
-                dmg = 1f;
-                break;
-        }
-        return dmg;
-    }
-
-
-    private float CalculateEnergyConsumption(ChargeState currentState)
-    {
-        float energyCons = 0;
-        switch(currentState)
-        {
-            case ChargeState.firstPhase:
-                energyCons = baseEnergyConsumption; //10
-                break;
-            case ChargeState.secondPhase:
-                energyCons = baseEnergyConsumption * amplCoef; //15
-                break;
-            case ChargeState.thirdPhase:
-                energyCons = baseEnergyConsumption * 2; //20
-                break;
-            case ChargeState.finalPhase:
-                energyCons = baseEnergyConsumption * amplCoef * 2; //30
-                break;
-            default: 
-                energyCons = baseEnergyConsumption;
-                break;
-        }
-        return energyCons;
-    }
-
 
     public override WeaponSO GetWeaponSO()
     {

@@ -7,8 +7,8 @@ using System;
 [RequireComponent(typeof(PatrolPoints))]
 public class Mole : MonoBehaviour, IDamageable
 {
-    private int maxHealth = 100;
-    private int currentHealth;
+    private float maxHealth = 100;
+    private float currentHealth;
     private PatrolPoints patrolPoints;
     private Animator animator;
     [SerializeField] Image hpFillAmount;

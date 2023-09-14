@@ -73,8 +73,9 @@ public class Magic : ChargableWeapon
     {
         chargingTimer = 0.0f;
 
+
         Vector2 playerLastMoveInput = Player.Instance.GetLastMoveInput();
-        MagicMissile magicMissile = Instantiate(magicMissilePrefab, Player.Instance.transform.position, Quaternion.identity);
+        MagicMissile magicMissile = Instantiate(magicMissilePrefab, Player.Instance.transform.position + GetMissileOffset(), Quaternion.identity);
         magicMissile.transform.Rotate(0, 0, Mathf.Atan2(playerLastMoveInput.y, playerLastMoveInput.x) * Mathf.Rad2Deg);
 
         magicMissile.GetComponent<Rigidbody2D>().velocity = playerLastMoveInput * weaponSO.projectileFlightSpeed;
@@ -87,6 +88,54 @@ public class Magic : ChargableWeapon
         Destroy(magicMissile.gameObject, 2f);
         ResetDamageToDefault();
         energyConsumption = 0;
+    }
+
+
+    //метод необходим для задания смещения начальной позиции снаряда. 
+    //Опять же, для исправления бага поражения цели, стоящей за первоначальной, в случае,
+    //если игрок стреляет впритык к ней. Оффсет вычисляем следующим образом: берём последний входной инпут от игрока
+    //и устанавливаем смещение на маленькую дистанцию в противоположном направлении
+    private Vector3 GetMissileOffset()  
+    {
+        Vector3 offset;
+        Vector2 lastMoveInput = Player.Instance.GetLastMoveInput();
+        if (lastMoveInput == Vector2.up)
+        {
+            offset = new Vector3(0, -0.1f, 0);
+        }
+        else if (lastMoveInput == Vector2.down)
+        {
+            offset = new Vector3(0, 0.1f, 0);
+        }
+        else if (lastMoveInput == Vector2.left)
+        {
+            offset = new Vector3(0.1f, 0, 0);
+        }
+        else if (lastMoveInput == Vector2.right)
+        {
+            offset = new Vector3(-0.1f, 0, 0);
+        }
+        else if (lastMoveInput == new Vector2(0.71f, 0.71f))
+        {
+            offset = new Vector3(-0.1f, -0.1f, 0);
+        }
+        else if (lastMoveInput == new Vector2(0.71f, -0.71f))
+        {
+            offset = new Vector3(-0.1f, 0.1f, 0);
+        }
+        else if (lastMoveInput == new Vector2(-0.71f, -0.71f))
+        {
+            offset = new Vector3(0.1f, 0.1f, 0);
+        }
+        else if (lastMoveInput == new Vector2(-0.71f, 0.71f))
+        {
+            offset = new Vector3(0.1f, -0.1f, 0);
+        }
+        else
+        {
+            offset = Vector3.zero;
+        }
+        return offset;
     }
 
     public override WeaponSO GetWeaponSO()

@@ -94,6 +94,7 @@ public class PlayerStats : MonoBehaviour
 
             currentEXP = surplusExp;
             Energy = maxEnergy;
+            UpdateEnergy();
         }
         OnExpGained?.Invoke(this, new StatChangedEventArgs<int> {currentValue = currentEXP, maxValue = requiredEXP, level = playerLevel});
     }
@@ -110,6 +111,14 @@ public class PlayerStats : MonoBehaviour
         {
             Energy = 0;
         }
+        OnEnergyChanged?.Invoke(this, new StatChangedEventArgs<float> {currentValue = Energy, maxValue = maxEnergy});
+    }
+
+
+    //Перегруженный метод нужен в случаях, где необходимо обновить бары, когда количество энергии заранее устанавливается 
+    //Например, когда игрок повышает уровень, значение текущей энергии устанавливается на максимум.
+    public void UpdateEnergy()
+    {
         OnEnergyChanged?.Invoke(this, new StatChangedEventArgs<float> {currentValue = Energy, maxValue = maxEnergy});
     }
 

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MagicMissile : MonoBehaviour
 {
+    [SerializeField] private WeaponSO weaponSO;
     private float damage;
-    private bool hasHitTarget = false; //для исправления бага, при котором снаряд поражал цель, стоящую за ним
+    private bool hasHitTarget = false; //для исправления бага, при котором снаряд поражал цель, стоящую за ней
     private void OnTriggerEnter2D(Collider2D other)
     {
         IDamageable hitObject = other.gameObject.GetComponent<IDamageable>();
@@ -14,13 +15,14 @@ public class MagicMissile : MonoBehaviour
         {
             Destroy(this.gameObject);
             hasHitTarget = true;
+            Debug.Log("Hit wall");
         }
 
         if (hitObject != null && !hasHitTarget)
         {
             Destroy(this.gameObject);
-            hitObject.TakeDamage((int)damage, WeaponSO.Element.fire);
-            Debug.Log("Damage dealt: " + damage);
+            hitObject.TakeDamage((int)damage, weaponSO.element);
+            Debug.Log("Hit destructable");
         }
 
 

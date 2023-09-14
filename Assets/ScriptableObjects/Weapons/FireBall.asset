@@ -16,7 +16,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 37a2d4b7807fb4089a452e9a68acc935, type: 3}
   hitCooldown: 2
   damage: 10
-  prefab: {fileID: 2399024545590972224, guid: b468dfc919e0f12429ba07dbf08ee216, type: 3}
+  prefab: {fileID: 1227971143163892702, guid: b98e2d76f034db24380981a13e23205a, type: 3}
   projectileFlightSpeed: 5
   moveSpeedPenaltyCoef: 0
   type: 2

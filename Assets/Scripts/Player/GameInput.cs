@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using System;
 
 
@@ -52,21 +53,28 @@ public class GameInput : MonoBehaviour
 
     private void Aiming_starting(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
             OnAimingStarted?.Invoke(this, EventArgs.Empty);
-            //cooldown = true;
-            //StartCoroutine(nameof(StartCooldown));
- 
+        }
+
     }
 
     private void Aiming_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        OnAimingCanceled?.Invoke(this, EventArgs.Empty);
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            OnAimingCanceled?.Invoke(this, EventArgs.Empty);
+        }
+
     }
 
     private void Hitting_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        OnHittingPerformed?.Invoke(this, EventArgs.Empty);
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            OnHittingPerformed?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     private void WeaponSwitch_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)

@@ -167,3 +167,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c2549cd84e6a04d9f5a64a39c158ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponSO: {fileID: 11400000, guid: 8c484a8a8c90ab343bbed75f4265e015, type: 2}

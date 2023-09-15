@@ -53,7 +53,7 @@ public class GameInput : MonoBehaviour
 
     private void Aiming_starting(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (!EventSystem.current.IsPointerOverGameObject()) //если курсор находится над UI, нажатие лкм будет работать с элементами UI
         {
             OnAimingStarted?.Invoke(this, EventArgs.Empty);
         }

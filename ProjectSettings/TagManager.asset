@@ -53,6 +53,9 @@ TagManager:
   - name: Buildings&Trees
     uniqueID: 2981567029
     locked: 0
+  - name: Blackout
+    uniqueID: 3979349471
+    locked: 0
   - name: UI
     uniqueID: 2559240195
     locked: 0

@@ -34,7 +34,8 @@ public class Player : MonoBehaviour, IDamageable
     [HideInInspector] public bool isCharging = false;
     
 
-    [Header("Prefabs")]
+    [Header("PlayerStuff")]
+    [SerializeField] private GameObject light;
     [SerializeField] private GameObject crosshair;
     [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private GameObject bowAndArrow;
@@ -321,5 +322,21 @@ public class Player : MonoBehaviour, IDamageable
     public void DeathSequence()
     {
         Debug.LogWarning("You died!!");
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Blackout"))
+        {
+            light.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Blackout"))
+        {
+            light.SetActive(false);
+        }
     }
 }

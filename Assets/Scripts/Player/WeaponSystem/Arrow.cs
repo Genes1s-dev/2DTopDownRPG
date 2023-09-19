@@ -21,7 +21,5 @@ public class Arrow : MonoBehaviour
             Destroy(this.gameObject);
             hitObject.TakeDamage(weaponSO.damage, weaponSO.element);
         }
-
-
     }
 }

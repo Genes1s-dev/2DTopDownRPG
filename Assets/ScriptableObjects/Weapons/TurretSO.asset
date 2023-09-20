@@ -17,7 +17,7 @@ MonoBehaviour:
   hitCooldown: 1
   damage: 30
   prefab: {fileID: 9109556090096130059, guid: 3528bdc685ae58546959fb18213ab4e0, type: 3}
-  projectileFlightSpeed: 10
+  projectileFlightSpeed: 5
   moveSpeedPenaltyCoef: 0
   type: 1
   element: 0

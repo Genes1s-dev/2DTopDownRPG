@@ -67,7 +67,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8084d12890bf65e4f87882417cb4a36b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrow: {fileID: 4277227646303760145, guid: 3528bdc685ae58546959fb18213ab4e0, type: 3}
+  weaponSO: {fileID: 11400000, guid: e5ad96faed56c004ca416d076cff10ce, type: 2}
+  arrowPrefab: {fileID: 4277227646303760145, guid: 3528bdc685ae58546959fb18213ab4e0, type: 3}
+  targetSpots:
+  - {fileID: 0}
+  - {fileID: 0}
+  arrowStartPosition: {fileID: 2519775756067850173}
 --- !u!1 &6756525888290614610
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,5 +254,10 @@ PrefabInstance:
 --- !u!4 &2519775756036908108 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 274171117874706, guid: 5d399a0e29a67af479eab87971ab2733, type: 3}
+  m_PrefabInstance: {fileID: 2520032170684058206}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2519775756067850173 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 274171154058723, guid: 5d399a0e29a67af479eab87971ab2733, type: 3}
   m_PrefabInstance: {fileID: 2520032170684058206}
   m_PrefabAsset: {fileID: 0}

@@ -31,6 +31,7 @@ public class Dummy : MonoBehaviour, IDamageable
     {
         currentHealth += healthToRestore;
         currentHealth = Mathf.Clamp(currentHealth, currentHealth, maxHealth);
+        Debug.Log("Dummy HP received: " + healthToRestore);
     }
 
     public void DeathSequence()

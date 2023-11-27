@@ -7,7 +7,6 @@ public class Player : MonoBehaviour, IDamageable
 {
     public static Player Instance;
     [SerializeField] private List<BaseWeapon> weapons;
-    //[SerializeField] private Dictionary<Vector2, Sprite> startingDirectionalSprites;
     private BaseWeapon currentWeapon;
     [SerializeField] private GameInput gameInput;
     
@@ -164,16 +163,6 @@ public class Player : MonoBehaviour, IDamageable
         //Вместо этого, используя Physics.RaycastAll, мы можем прервать цикл после взаимодействия с первым подходящим объектом, что эффективно и избавляет нас от необходимости создания и управления предварительно выделенным массивом.
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position - new Vector3(0, 0.05f, 0), radius);
 
-
-        /*foreach (Collider2D collider in colliders)
-        {
-            IInteractable objectToInteract = collider.gameObject.GetComponent<IInteractable>();
-            if (objectToInteract != null)
-            {
-                objectToInteract?.Interact();
-                break;
-            }
-        }*/
 
         float closestDistance = Mathf.Infinity;
         Collider2D closestCollider = null;

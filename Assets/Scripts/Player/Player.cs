@@ -29,10 +29,11 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private float arrowShootCooldown = 1.5f;
     private bool isCooldown = false;
     private bool isWalking = false;
-    [HideInInspector] public bool isAiming = false;
-    [HideInInspector] public bool isCharging = false;
+    //[HideInInspector] public bool isAiming = false;
+    //[HideInInspector] public bool isCharging = false;
     
-
+    public bool isAiming {get; private set;}
+    public bool isCharging {get; private set;}
     [Header("PlayerStuff")]
     [SerializeField] private GameObject light;
     [SerializeField] private GameObject crosshair;
@@ -40,7 +41,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private GameObject bowAndArrow;
 
     [Header("Items")]
-    [HideInInspector] public bool hasKey;
+    //[HideInInspector] public bool hasKey;
     private List<GameObject> items;
     private List<RaycastHit2D> hitList = new List<RaycastHit2D>();
     private Inventory inventory;
